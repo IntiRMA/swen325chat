@@ -1,0 +1,8 @@
+{
+  "name": "sewn_chat",
+  "app_id": "5772f5bc",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
