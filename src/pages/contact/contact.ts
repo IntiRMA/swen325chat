@@ -29,7 +29,7 @@ export class ContactPage {
     var friends = [];
     await firebase.database().ref().child('/users').child(firebase.auth().currentUser.uid).child('friends').once('value', (snapshot) => {
       let result = snapshot.val();
-      for(let k in result){ //"k" provides key Id of each object
+      for(let k in result){
         friends.push(k);
        }
        friends.push(firebase.auth().currentUser.uid);
@@ -42,7 +42,7 @@ export class ContactPage {
     firebase.database().ref().child('/users').once('value', (snapshot) => {
       let result = snapshot.val();
       for(let k in result){ //"k" provides key Id of each object
-        if(!friends.includes(k)){
+        if(friends.includes(k)){
           this.users.push({
              email : result[k].email,
              ID : k
