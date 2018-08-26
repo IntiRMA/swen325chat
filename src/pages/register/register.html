@@ -17,6 +17,13 @@
     <ion-label color="primary" floating >Password</ion-label>
     <ion-input [(ngModel)]="user.password"></ion-input>
   </ion-item>
+  <ion-footer>
+
+    <ion-toolbar position="bottom">
+    <ion-icon name="help-circle" (click)="infopg()"></ion-icon>
+     <ion-icon name="information-circle" (click)="developer()"></ion-icon>
+  </ion-toolbar>
+  </ion-footer>
 
   <button ion-button round color="dark" (click)="register(user)">Register + SignIn</button>
 </ion-content>

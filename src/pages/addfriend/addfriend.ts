@@ -38,10 +38,11 @@ export class AddfriendPage {
 
   showAvailableFriends(friends){
       this.data = [];
+      var user=firebase.auth().currentUser;
       firebase.database().ref().child('/users').once('value', (snapshot) => {
         let r = snapshot.val();
         for(let f in r){
-          if(!friends.includes(f)){
+          if(!friends.includes(f)&&r[f].email!=user.email){
             this.data.push({
                username: r[f].username,
                email : r[f].email,
@@ -50,9 +51,13 @@ export class AddfriendPage {
           }
          }
       });
+
     }
 
     addFriend(user:User){
+      if(user.email==firebase.auth().currentUser.uid){
+        return;
+      }
       firebase.database().ref('users/' + firebase.auth().currentUser.uid+'/friends/'+user.ID).set(true);
             firebase.database().ref('users/' + user.ID +'/friends/'+ firebase.auth().currentUser.uid).set(true);
     }

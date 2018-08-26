@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { TabsPage } from '../tabs/tabs';
 import firebase from 'firebase';
 import { LoginService } from '../../services/loginservice';
+import { InfoPage } from '../info/info';
+import { DeveloperinfoPage } from "../developerinfo/developerinfo";
 /**
  * Generated class for the RegisterPage page.
  *
@@ -21,7 +23,7 @@ export class RegisterPage {
 
   user = {} as User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AngularFireAuth,private logIn:LoginService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AngularFireAuth,private logIn:LoginService,public alertCtrl:AlertController) {
 
     }
 
@@ -45,8 +47,23 @@ async register(user:User){
       this.navCtrl.push(TabsPage);
     }
     }catch(e){
-      console.log("error: "+e);
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: 'Please enter a valid user name and password',
+        message:"email format: name@mail.com passwor format: at least 6 characters",
+        buttons: ['Ok']
+      });
+
+      alert.present();
     }
+  }
+
+  infopg(){
+    this.navCtrl.push(InfoPage);
+  }
+
+  developer(){
+    this.navCtrl.push(DeveloperinfoPage);
   }
 
 }

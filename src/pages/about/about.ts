@@ -30,14 +30,31 @@ export class AboutPage {
     this.showConvos(items);
   }
 
+  async getDudes(chatID){
+    var ret=null;
+    await firebase.database().ref('chats/'+chatID+"/members").once('value', itemSnapshot => {
+      itemSnapshot.forEach( itemSnap => {
+        if(itemSnap.key!=firebase.auth().currentUser.uid){
+            firebase.database().ref('users/'+itemSnap.key).once('value',u=>{
+            ret=u.emai;
+          });
+        }
+      });
+    });
+    return ret;
+  }
+
   async showConvos(userRooms){
+    var i=1;
     await firebase.database().ref('chats').once('value', itemSnapshot => {
       this.convos = [];
       itemSnapshot.forEach( itemSnap => {
         if(userRooms.includes(itemSnap.key)){
           this.convos.push({
-            ID : itemSnap.key
+            ID : itemSnap.key,
+            email:"chat: "+i
           });
+          i++;
         }
       });
     });

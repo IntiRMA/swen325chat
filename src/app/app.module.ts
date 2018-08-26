@@ -11,6 +11,8 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { AddfriendPage } from '../pages/addfriend/addfriend';
 import {ChatsPage} from '../pages/chats/chats';
+import { InfoPage } from "../pages/info/info";
+import { DeveloperinfoPage } from "../pages/developerinfo/developerinfo"
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -42,7 +44,9 @@ export const firebaseConfig = {
     LoginPage,
     RegisterPage,
     AddfriendPage,
-    ChatsPage
+    ChatsPage,
+    InfoPage,
+    DeveloperinfoPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,9 @@ export const firebaseConfig = {
     LoginPage,
     RegisterPage,
     AddfriendPage,
-    ChatsPage
+    ChatsPage,
+    InfoPage,
+    DeveloperinfoPage
   ],
   providers: [
     StatusBar,

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { TabsPage } from '../tabs/tabs';
 import { RegisterPage } from '../register/register';
+import { InfoPage } from '../info/info';
 import { LoginService } from '../../services/loginservice';
+import { DeveloperinfoPage } from "../developerinfo/developerinfo";
 /**
  * Generated class for the LoginPage pag.
  *
@@ -20,7 +22,7 @@ export class LoginPage {
 
   user = {} as User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private logIn:LoginService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private logIn:LoginService,public alertCtrl:AlertController) {
 
     }
 
@@ -30,15 +32,31 @@ export class LoginPage {
 
 async login(user:User){
     try{
-      this.logIn.login(user);
+      await this.logIn.login(user);
       this.navCtrl.push(TabsPage);
     }catch(e){
-      console.log("error: "+e);
+
+  let alert = this.alertCtrl.create({
+    title: 'Eoror',
+    subTitle: 'User Details none existent or wrong',
+    buttons: ['Ok']
+  });
+
+  alert.present();
+
     }
   }
 
   register(){
     this.navCtrl.push(RegisterPage);
+  }
+
+  infopg(){
+    this.navCtrl.push(InfoPage);
+  }
+
+  developer(){
+    this.navCtrl.push(DeveloperinfoPage);
   }
 
 }

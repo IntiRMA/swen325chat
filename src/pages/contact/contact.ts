@@ -39,10 +39,17 @@ export class ContactPage {
 
   showFriends(friends){
     this.users = [];
+    var user=firebase.auth().currentUser;
     firebase.database().ref().child('/users').once('value', (snapshot) => {
       let result = snapshot.val();
       for(let k in result){ //"k" provides key Id of each object
-        if(friends.includes(k)){
+        if(result[k].email==user.email){
+        this.users.push({
+           email : "ME",
+           ID : k
+         });
+      }
+        else if(friends.includes(k)){
           this.users.push({
              email : result[k].email,
              ID : k
@@ -64,7 +71,7 @@ export class ContactPage {
     this.navCtrl.push(ChatsPage, {
         ID: chatID,
         email: firebase.auth().currentUser.email,
-        chatTitle: chatID
+        chatTitle: user.email
     });
   }
 
