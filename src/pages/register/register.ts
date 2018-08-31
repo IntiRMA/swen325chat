@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import { LoginService } from '../../services/loginservice';
 import { InfoPage } from '../info/info';
 import { DeveloperinfoPage } from "../developerinfo/developerinfo";
+import { RegisterService } from '../../services/registerservice';
 /**
  * Generated class for the RegisterPage page.
  *
@@ -23,7 +24,7 @@ export class RegisterPage {
 
   user = {} as User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AngularFireAuth,private logIn:LoginService,public alertCtrl:AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AngularFireAuth,private RegS:RegisterService,public alertCtrl:AlertController) {
 
     }
 
@@ -33,19 +34,8 @@ export class RegisterPage {
 
 async register(user:User){
     try{
-      const res= await this.auth.auth.createUserWithEmailAndPassword(user.email, user.password);
-      if(res){
-        user.ID=firebase.auth().currentUser.uid;
-      firebase.database().ref("/users/"+firebase.auth().currentUser.uid).set({
-        email:user.email,
-        ID:firebase.auth().currentUser.uid
-
-      });
-      try{
-        this.logIn.login(user);
-      }catch(e){}
+    await this.RegS.register(user);
       this.navCtrl.push(TabsPage);
-    }
     }catch(e){
       let alert = this.alertCtrl.create({
         title: 'Error',

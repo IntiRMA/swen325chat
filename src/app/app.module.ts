@@ -23,6 +23,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { LoginService } from '../services/loginservice';
+import { RegisterService } from '../services/registerservice';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA2MPAR8kxwZBS1BGv6o3q6TNcrZ7tQp_g",
@@ -74,7 +75,8 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LoginService
+    LoginService,
+    RegisterService
   ]
 })
 export class AppModule {}

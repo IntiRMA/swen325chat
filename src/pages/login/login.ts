@@ -37,8 +37,8 @@ async login(user:User){
     }catch(e){
 
   let alert = this.alertCtrl.create({
-    title: 'Eoror',
-    subTitle: 'User Details none existent or wrong',
+    title: 'Error',
+    subTitle: 'User Details none existent or wrong , Please enter a valid username and password',
     buttons: ['Ok']
   });
 

@@ -36,7 +36,7 @@ export class AboutPage {
       itemSnapshot.forEach( itemSnap => {
         if(itemSnap.key!=firebase.auth().currentUser.uid){
             firebase.database().ref('users/'+itemSnap.key).once('value',u=>{
-            ret=u.emai;
+            ret=u;
           });
         }
       });
